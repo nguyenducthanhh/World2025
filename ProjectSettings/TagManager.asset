@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerBullet
+  - Enemy
+  - Energy
+  - Explosion
   layers:
   - Default
   - TransparentFX
@@ -39,6 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 2527906233
+    locked: 0
+  - name: Rock
+    uniqueID: 2520886089
+    locked: 0
+  - name: Tree
+    uniqueID: 3391877931
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -50,4 +62,16 @@ TagManager:
     locked: 0
   - name: Gun
     uniqueID: 3321066685
+    locked: 0
+  - name: Enemy
+    uniqueID: 650808093
+    locked: 0
+  - name: Blood
+    uniqueID: 792313789
+    locked: 0
+  - name: HpBar
+    uniqueID: 1051588229
+    locked: 0
+  - name: Energy
+    uniqueID: 750342833
     locked: 0
