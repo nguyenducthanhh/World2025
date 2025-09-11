@@ -28,8 +28,8 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") )
         {
-            Instantiate(bloodPrefab, transform.position, Quaternion.identity);
-            //Destroy(bloodPrefab, 1f);
+            GameObject blood = Instantiate(bloodPrefab, transform.position, Quaternion.identity);
+            Destroy(blood, 1f);
             Enemy enemy = collision.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
         }

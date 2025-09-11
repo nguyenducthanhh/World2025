@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float maxHp = 100f;
     [SerializeField] private Image hpBar;
     protected float currentHp;
@@ -11,6 +13,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    
 
     private void Awake()
     {
@@ -28,6 +31,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         MovePlayer();
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            gameManager.PauseGameMenu();
+        }
+
+
     }
 
     void MovePlayer()
@@ -52,6 +61,22 @@ public class Player : MonoBehaviour
             animator.SetBool("IsRun", false);   
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Usb"))
+        {
+            Debug.Log("Win Game");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.CompareTag("Energy"))
+        {
+            gameManager.AddEnegy();
+            Destroy(collision.gameObject);
+            audioManager.PlayEnergySound();
+        }
     }
 
     public void TakeDamage(float damage)
@@ -89,6 +114,6 @@ public class Player : MonoBehaviour
     
     private void Die()
     {
-        Destroy(gameObject);
+        gameManager.GameOverMenu();
     }
 }

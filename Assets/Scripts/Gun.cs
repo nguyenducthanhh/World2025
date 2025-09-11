@@ -5,6 +5,7 @@ using TMPro;
 public class Gun : MonoBehaviour
 {
     private float rotateOffset = 180f;
+    [SerializeField] private AudioManager audioManager;
     [SerializeField] private Transform firePos;
     [SerializeField] private GameObject bulletPrefabs;
     [SerializeField] private float shotDelay = 0.15f;
@@ -53,6 +54,7 @@ public class Gun : MonoBehaviour
             Instantiate(bulletPrefabs, firePos.position, firePos.rotation);
             currentAmmo--;
             UpdateAmmoText();
+            audioManager.PlayShootSound();
         }
     }
 
@@ -62,6 +64,7 @@ public class Gun : MonoBehaviour
         {
             currentAmmo = maxAmmo;
             UpdateAmmoText();
+            audioManager.PlayReloadSound();
         }
     }
 

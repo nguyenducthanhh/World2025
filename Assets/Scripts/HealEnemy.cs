@@ -33,7 +33,7 @@ public class HealEnemy : Enemy
             player.TakeDamage(stayDamage * tick);
             yield return new WaitForSeconds(tick);
         }
-        dameOverTimeCoroutine = null;
+        
     }
 
     protected override void Die()

@@ -1,12 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using Unity.VisualScripting;
 using UnityEngine;
 
-
-
-public class BasicEnemy : Enemy
+public class MiniEnemy : Enemy
 {
     Coroutine dameOverTimeCoroutine;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,7 +13,7 @@ public class BasicEnemy : Enemy
         playerInside = true;
 
         if (dameOverTimeCoroutine == null) dameOverTimeCoroutine = StartCoroutine(DamageOverTime());
-        
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -26,7 +22,7 @@ public class BasicEnemy : Enemy
 
         playerInside = false;
         if (dameOverTimeCoroutine != null) { StopCoroutine(dameOverTimeCoroutine); dameOverTimeCoroutine = null; }
-        
+
     }
 
     IEnumerator DamageOverTime()
@@ -36,6 +32,6 @@ public class BasicEnemy : Enemy
             player.TakeDamage(stayDamage * tick);
             yield return new WaitForSeconds(tick);
         }
-        
+
     }
 }

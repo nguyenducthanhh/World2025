@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Energy
   - Explosion
+  - EnemyBullet
+  - Usb
   layers:
   - Default
   - TransparentFX
@@ -74,4 +76,7 @@ TagManager:
     locked: 0
   - name: Energy
     uniqueID: 750342833
+    locked: 0
+  - name: GameUI
+    uniqueID: 3601770267
     locked: 0
