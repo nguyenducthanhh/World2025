@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private int currentEnegy;
-    [SerializeField] private int energyThreshold = 30;
+    [SerializeField] private int energyThreshold = 20;
     [SerializeField] private GameObject boss;
     [SerializeField] private GameObject enemy;
     private bool bossCalled = false;
@@ -19,8 +20,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject pauseGameMenu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject guideMenu;
+    [SerializeField] private GameObject guideMenuPause;
+    [SerializeField] private GameObject gameWinMenu;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private CinemachineVirtualCamera cam;
+    [SerializeField] private GameObject red;
+    [SerializeField] private Player player;
 
+    private void Awake()
+    {
+        player = FindAnyObjectByType<Player>();
+    }
 
     void Start()
     {
@@ -30,11 +41,13 @@ public class GameManager : MonoBehaviour
         boss.SetActive(false);
         MainMenu();
         audioManager.StopAudioGame();
+        cam.m_Lens.OrthographicSize = 7f;
+        red.SetActive(false);
     }
 
 
 
-    public void AddEnegy()
+    public void AddEnergy()
     {
         if(bossCalled) return;  
 
@@ -54,6 +67,10 @@ public class GameManager : MonoBehaviour
         enemy.SetActive(false);
         gameUI.SetActive(false);
         audioManager.PlayBossAudio();
+        cam.m_Lens.OrthographicSize = 11f;
+        red.SetActive(true);
+        player.Heal(150f);
+        
         
 
     }
@@ -69,11 +86,11 @@ public class GameManager : MonoBehaviour
         {
             if (currentEnegy > 0)
             {
-                energyText.text = currentEnegy.ToString() + "/30";
+                energyText.text = currentEnegy.ToString() + "/20";
             }
             else
             {
-                energyText.text = "0/30";
+                energyText.text = "0/20";
             }
 
         }
@@ -85,6 +102,9 @@ public class GameManager : MonoBehaviour
         mainMenu.SetActive(true);
         gameOverMenu.SetActive(false);
         pauseGameMenu.SetActive(false);
+        guideMenu.SetActive(false);
+        guideMenuPause.SetActive(false);
+        gameWinMenu.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -93,6 +113,20 @@ public class GameManager : MonoBehaviour
         gameOverMenu.SetActive(true);   
         mainMenu.SetActive(false);
         pauseGameMenu.SetActive(false);
+        guideMenu.SetActive(false);
+        guideMenuPause.SetActive(false);
+        gameWinMenu.SetActive(false);
+        Time.timeScale = 0f;
+    }
+
+    public void GameWinMenu()
+    {
+        gameOverMenu.SetActive(false);
+        mainMenu.SetActive(false);
+        pauseGameMenu.SetActive(false);
+        guideMenu.SetActive(false);
+        guideMenuPause.SetActive(false);
+        gameWinMenu.SetActive(true);
         Time.timeScale = 0f;
     }
 
@@ -101,6 +135,9 @@ public class GameManager : MonoBehaviour
         pauseGameMenu.SetActive(true);
         mainMenu.SetActive(false);
         gameOverMenu.SetActive(false);
+        guideMenu.SetActive(false);
+        guideMenuPause.SetActive(false);
+        gameWinMenu.SetActive(false);
         Time.timeScale = 0f;
     }
 
@@ -109,6 +146,9 @@ public class GameManager : MonoBehaviour
         mainMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         pauseGameMenu.SetActive(false);
+        guideMenu.SetActive(false);
+        guideMenuPause.SetActive(false);
+        gameWinMenu.SetActive(false);
         Time.timeScale = 1f;
         audioManager.PlayDefaultAudio();
     }
@@ -118,7 +158,34 @@ public class GameManager : MonoBehaviour
         mainMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         pauseGameMenu.SetActive(false);
+        guideMenu.SetActive(false);
+        guideMenuPause.SetActive(false);
+        gameWinMenu.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void GuideMenu()
+    {
+        guideMenu.SetActive(true); 
+        mainMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
+        pauseGameMenu.SetActive(false);
+        guideMenuPause.SetActive(false);
+        gameWinMenu.SetActive(false);
+        Time.timeScale = 0f;
+        
+    }
+
+    public void GuideMenuPause()
+    {
+        guideMenuPause.SetActive(true);
+        mainMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
+        pauseGameMenu.SetActive(false);
+        guideMenu.SetActive (false);
+        gameWinMenu.SetActive(false);
+        Time.timeScale = 0f;
+
     }
 
 }

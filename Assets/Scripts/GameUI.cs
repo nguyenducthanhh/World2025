@@ -11,7 +11,15 @@ public class GameUI : MonoBehaviour
         gameManager.StartGame();
     }
 
-  
+    public void GuideMenu()
+    {
+        gameManager.GuideMenu();
+    }
+
+    public void GuideMenuPause()
+    {
+        gameManager.GuideMenuPause();
+    }
     public void QuitGame()
     {
         Application.Quit();
@@ -22,6 +30,15 @@ public class GameUI : MonoBehaviour
         gameManager.ResumeGame();
     }
 
+    public void PauseGame()
+    {
+        gameManager.PauseGameMenu();
+    }
+
+    public void WinGame()
+    {
+        gameManager.GameWinMenu();
+    }
     public void MainMenu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

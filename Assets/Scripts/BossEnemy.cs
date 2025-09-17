@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +15,7 @@ public class BossEnemy : Enemy
     [SerializeField] private float skillCoolDown = 3f;
     [SerializeField] private GameObject usbPrefabs;
     private float nextSkillTime = 0f;
-
+    
     Coroutine dameOverTimeCoroutine;
    
     protected override void Update()

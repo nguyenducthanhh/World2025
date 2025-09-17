@@ -31,7 +31,7 @@ public class CursorManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1))
         {
-            Cursor.SetCursor(cursorReload, hotspot, CursorMode.Auto);
+            Cursor.SetCursor(cursorNormal, hotspot, CursorMode.Auto);
         }
 
     }

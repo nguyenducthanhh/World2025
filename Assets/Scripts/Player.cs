@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private float maxHp = 100f;
+    [SerializeField] private float maxHp = 200f;
     [SerializeField] private Image hpBar;
     protected float currentHp;
     [SerializeField] private float moveSpeed = 5f;
@@ -67,13 +67,13 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Usb"))
         {
-            Debug.Log("Win Game");
+            gameManager.GameWinMenu();
             Destroy(collision.gameObject);
         }
 
         if (collision.CompareTag("Energy"))
         {
-            gameManager.AddEnegy();
+            gameManager.AddEnergy();
             Destroy(collision.gameObject);
             audioManager.PlayEnergySound();
         }
@@ -98,8 +98,7 @@ public class Player : MonoBehaviour
             currentHp += healValue;
             currentHp = Mathf.Min(currentHp, maxHp);
             UpdateHpBar() ; 
-        }
-        
+        }   
     }
 
 
